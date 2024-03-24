@@ -48,17 +48,17 @@ void performBackup(BackupSettings settings) {
   if (hasChanges(sourceDirectory)) {
     logMessage('更新が検出されました。バックアップを実行します。');
 
-for (int i = settings.generations; i > 1; i--) {
-  String currentBackup = '${settings.minecraftDirectory}/saves_$i';
-  String previousBackup = '${settings.minecraftDirectory}/saves_${i - 1}';
-  if (Directory(previousBackup).existsSync()) {
-    // 移動先のディレクトリが存在している場合は削除する
-    if (Directory(currentBackup).existsSync()) {
-      Directory(currentBackup).deleteSync(recursive: true);
+    for (int i = settings.generations; i > 1; i--) {
+      String currentBackup = '${settings.minecraftDirectory}/saves_$i';
+      String previousBackup = '${settings.minecraftDirectory}/saves_${i - 1}';
+      if (Directory(previousBackup).existsSync()) {
+        // 移動先のディレクトリが存在している場合は削除する
+        if (Directory(currentBackup).existsSync()) {
+          Directory(currentBackup).deleteSync(recursive: true);
+        }
+        Directory(previousBackup).renameSync(currentBackup); // ディレクトリを移動
+      }
     }
-    Directory(previousBackup).renameSync(currentBackup); // ディレクトリを移動
-  }
-}
 
 
     Directory('${settings.minecraftDirectory}/saves_1').createSync(recursive: true);

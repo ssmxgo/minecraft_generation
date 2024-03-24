@@ -34,12 +34,14 @@ class BackupSettings {
   }
 }
 
+
 // ログファイルにメッセージを出力する関数
 void logMessage(String message) {
   var logFile = File('backup_log.txt');
   var timestamp = DateTime.now().toString();
   logFile.writeAsStringSync('$timestamp: $message\n', mode: FileMode.append);
 }
+
 
 // バックアップの実行と世代管理
 void performBackup(BackupSettings settings) {
@@ -107,11 +109,6 @@ bool hasChanges(String directory) {
   // すべてのファイルが一致している場合は変更なしと判定
   return false;
 }
-
-
-
-
-
 
 
 // メイン関数
